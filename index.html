@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Figueiredo — UGC Creator</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #ffffff;
+            --warm: #f8fafd;
+            --gold: #041e42;
+            --gold-l: #4a6488;
+            --dark: #041e42;
+            --muted: rgba(4, 30, 66, 0.7);
+            --surf: rgba(4, 30, 66, .08)
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none
+        }
+
+        .cur {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: multiply
+        }
+
+        .cur-r {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all .15s;
+            opacity: .6
+        }
+
+        .cur-r.hov {
+            width: 56px;
+            height: 56px;
+            opacity: .35
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 22px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, .85);
+            border-bottom: 1px solid rgba(4, 30, 66, .1);
+            transition: padding .4s
+        }
+
+        nav.s {
+            padding: 14px 60px;
+            background: rgba(255, 255, 255, .96)
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--dark);
+            text-decoration: none
+        }
+
+        .logo b {
+            color: var(--gold);
+            font-weight: 400
+        }
+
+        .nl {
+            display: flex;
+            gap: 40px;
+            list-style: none
+        }
+
+        .nl a {
+            font-size: .78rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .3s;
+            position: relative
+        }
+
+        .nl a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
+        }
+
+        .nl a:hover {
+            color: var(--dark)
+        }
+
+        .nl a:hover::after {
+            transform: scaleX(1)
+        }
+
+        .ncta {
+            padding: 10px 28px !important;
+            border: 1px solid var(--gold) !important;
+            color: var(--gold) !important;
+            border-radius: 100px !important;
+            transition: background .3s, color .3s !important
+        }
+
+        .ncta:hover {
+            background: var(--gold) !important;
+            color: var(--cream) !important
+        }
+
+        .ncta::after {
+            display: none !important
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 80px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(4, 30, 66, .08), transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(4, 30, 66, .05), transparent 60%)
+        }
+
+        .hg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1
+        }
+
+        .htag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 28px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .2s forwards
+        }
+
+        .htag::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--gold)
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fu .9s .4s forwards
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--gold)
+        }
+
+        .hdesc {
+            margin-top: 28px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 420px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .6s forwards
+        }
+
+        .hact {
+            margin-top: 44px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .8s forwards
+        }
+
+        .bp {
+            padding: 14px 36px;
+            background: var(--gold);
+            color: var(--cream);
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .82rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            cursor: none;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .3s;
+            box-shadow: 0 8px 32px rgba(4, 30, 66, .3)
+        }
+
+        .bp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 44px rgba(4, 30, 66, .4)
+        }
+
+        .bg2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .82rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .bg2:hover {
+            color: var(--dark)
+        }
+
+        .arr {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(4, 30, 66, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s
+        }
+
+        .bg2:hover .arr {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: white
+        }
+
+        .hv {
+            position: relative;
+            opacity: 0;
+            transform: translateX(40px);
+            animation: fr 1s .5s forwards
+        }
+
+        .him {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 4px 60px 4px 60px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .hio {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4, 30, 66, .5), transparent 50%)
+        }
+
+        .hfc {
+            position: absolute;
+            bottom: -24px;
+            left: -40px;
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 20px 28px;
+            box-shadow: 0 20px 60px rgba(4, 30, 66, .12);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            animation: fl 4s ease-in-out infinite
+        }
+
+        .hfc .n {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--gold)
+        }
+
+        .hfc .l {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .hfp {
+            position: absolute;
+            top: 32px;
+            right: -20px;
+            background: var(--dark);
+            color: var(--cream);
+            border-radius: 100px;
+            padding: 10px 20px;
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            animation: fl 5s ease-in-out infinite reverse
+        }
+
+        .ss {
+            padding: 60px;
+            border-top: 1px solid rgba(4, 30, 66, .1);
+            border-bottom: 1px solid rgba(4, 30, 66, .1);
+            background: rgba(4, 30, 66, .02)
+        }
+
+        .si {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px
+        }
+
+        .sn {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--dark);
+            line-height: 1
+        }
+
+        .sn span {
+            color: var(--gold);
+            font-size: 2rem
+        }
+
+        .sl {
+            font-size: .75rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        section {
+            padding: 120px 60px
+        }
+
+        .inner {
+            max-width: 1400px;
+            margin: 0 auto
+        }
+
+        .stag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px
+        }
+
+        .stag::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--gold)
+        }
+
+        .stit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 20px
+        }
+
+        .stit em {
+            font-style: italic;
+            color: var(--gold)
+        }
+
+        .ssub {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 520px
+        }
+
+        .ag {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            margin-top: 80px
+        }
+
+        .ai-wrap {
+            position: relative;
+            min-height: 500px
+        }
+
+        .ai1 {
+            width: 75%;
+            aspect-ratio: 2/3;
+            border-radius: 200px 200px 4px 4px;
+            overflow: hidden
+        }
+
+        .ai2 {
+            position: absolute;
+            right: 0;
+            bottom: -40px;
+            width: 55%;
+            aspect-ratio: 1;
+            border-radius: 4px 100px 4px 100px;
+            border: 8px solid var(--cream)
+        }
+
+        .at p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--muted);
+            margin-bottom: 20px
+        }
+
+        .at p strong {
+            color: var(--dark);
+            font-weight: 500
+        }
+
+        .sk {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 36px
+        }
+
+        .sk span {
+            padding: 8px 18px;
+            border: 1px solid rgba(4, 30, 66, .2);
+            border-radius: 100px;
+            font-size: .78rem;
+            color: var(--muted);
+            background: var(--surf);
+            transition: all .3s;
+            cursor: default
+        }
+
+        .sk span:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .sig {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-top: 36px
+        }
+
+        .gl {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 32px 0
+        }
+
+        .ps {
+            background: var(--warm)
+        }
+
+        .th {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+
+        .tn {
+            display: flex;
+            gap: 4px;
+            background: rgba(4, 30, 66, .05);
+            border-radius: 100px;
+            padding: 4px
+        }
+
+        .tb {
+            padding: 10px 28px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .8rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            cursor: none;
+            transition: all .3s
+        }
+
+        .tb.a {
+            background: var(--gold);
+            color: var(--cream);
+            box-shadow: 0 4px 16px rgba(4, 30, 66, .2)
+        }
+
+        .pp {
+            display: none
+        }
+
+        .pp.a {
+            display: block;
+            animation: fadeIn .4s ease
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .vg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px
+        }
+
+        .vc {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: none;
+            transition: transform .4s, box-shadow .4s
+        }
+
+        .vc:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 60px rgba(4, 30, 66, .15)
+        }
+
+        .vcf {
+            grid-column: span 2;
+            aspect-ratio: 16/9
+        }
+
+        .vo {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4, 30, 66, .85), rgba(4, 30, 66, .1) 50%, transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            opacity: .8;
+            transition: opacity .3s
+        }
+
+        .vc:hover .vo {
+            opacity: 1
+        }
+
+        .pl {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(.8);
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: all .3s
+        }
+
+        .vc:hover .pl {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1)
+        }
+
+        .vb {
+            font-size: .7rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4px
+        }
+
+        .vt {
+            font-size: .95rem;
+            color: white;
+            line-height: 1.3
+        }
+
+        .vv {
+            margin-top: 8px;
+            font-size: .72rem;
+            color: rgba(255, 255, 255, .6)
+        }
+
+        .pg {
+            columns: 3;
+            column-gap: 20px
+        }
+
+        .pi {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: none;
+            transition: transform .4s
+        }
+
+        .pi:hover {
+            transform: scale(1.02)
+        }
+
+        .pov {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 30, 66, .65);
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .pi:hover .pov {
+            opacity: 1
+        }
+
+        .pot {
+            color: white;
+            text-align: center;
+            font-size: .8rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            line-height: 1.6
+        }
+
+        .bs {
+            padding: 80px 60px
+        }
+
+        .bl {
+            text-align: center;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 40px
+        }
+
+        .btw {
+            overflow: hidden
+        }
+
+        .bt {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            animation: scr 20s linear infinite;
+            width: max-content
+        }
+
+        .bi {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold-l);
+            letter-spacing: .1em;
+            white-space: nowrap;
+            transition: color .3s
+        }
+
+        .bi:hover {
+            color: var(--gold)
+        }
+
+        .pg2 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px
+        }
+
+        .pc {
+            padding: 40px 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(4, 30, 66, .1);
+            background: var(--surf);
+            position: relative;
+            overflow: hidden;
+            transition: all .4s
+        }
+
+        .pc::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(4, 30, 66, .05), transparent 60%);
+            opacity: 0;
+            transition: opacity .4s
+        }
+
+        .pc:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px)
+        }
+
+        .pc:hover::before {
+            opacity: 1
+        }
+
+        .pn {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: rgba(4, 30, 66, .15);
+            line-height: 1;
+            margin-bottom: 20px
+        }
+
+        .ico {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gold-l), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px
+        }
+
+        .pc h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 12px
+        }
+
+        .pc p {
+            font-size: .88rem;
+            line-height: 1.7;
+            color: var(--muted)
+        }
+
+        .tss {
+            background: var(--dark);
+            padding: 120px 60px
+        }
+
+        .tss .stag,
+        .tss h2 em {
+            color: var(--cream)
+        }
+
+        .tss .stag::before {
+            background: var(--cream)
+        }
+
+        .tss h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--cream)
+        }
+
+        .tg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 60px
+        }
+
+        .tc {
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: all .4s
+        }
+
+        .tc:hover {
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .2);
+            transform: translateY(-4px)
+        }
+
+        .qm {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            line-height: .8;
+            color: var(--cream);
+            opacity: .3;
+            margin-bottom: 16px
+        }
+
+        .tt {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .8);
+            margin-bottom: 28px;
+            font-style: italic
+        }
+
+        .ta {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .av {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-l), var(--cream));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem
+        }
+
+        .an {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--cream)
+        }
+
+        .ar {
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .6)
+        }
+
+        .cg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+            margin-top: 80px
+        }
+
+        .ci h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 20px
+        }
+
+        .ci p {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: var(--muted);
+            margin-bottom: 40px
+        }
+
+        .cd {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .cit {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .cic {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--surf);
+            border: 1px solid rgba(4, 30, 66, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0
+        }
+
+        .cil {
+            font-size: .68rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--gold)
+        }
+
+        .civ {
+            font-size: .92rem;
+            color: var(--dark)
+        }
+
+        .cf {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .fr {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .fg label {
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .fg input,
+        .fg select,
+        .fg textarea {
+            padding: 14px 18px;
+            background: var(--cream);
+            border: 1px solid rgba(4, 30, 66, .15);
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .9rem;
+            color: var(--dark);
+            outline: none;
+            transition: border-color .3s;
+            resize: none
+        }
+
+        .fg input:focus,
+        .fg select:focus,
+        .fg textarea:focus {
+            border-color: var(--gold)
+        }
+
+        .fg input::placeholder,
+        .fg textarea::placeholder {
+            color: rgba(4, 30, 66, .4)
+        }
+
+        .slnk {
+            display: flex;
+            gap: 14px;
+            margin-top: 40px
+        }
+
+        .slnk a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(4, 30, 66, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: all .3s
+        }
+
+        .slnk a:hover {
+            border-color: var(--gold);
+            color: var(--cream);
+            background: var(--gold);
+            transform: translateY(-2px)
+        }
+
+        footer {
+            padding: 60px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+
+        .fl {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--cream)
+        }
+
+        .fl b {
+            color: var(--gold-l);
+            font-weight: 400
+        }
+
+        .ft {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5)
+        }
+
+        .rev {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .8s, transform .8s
+        }
+
+        .rev.vis {
+            opacity: 1;
+            transform: none
+        }
+
+        .lb {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(4, 30, 66, .97);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s
+        }
+
+        .lb.op {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .lbc {
+            position: absolute;
+            top: 32px;
+            right: 40px;
+            color: rgba(255, 255, 255, .6);
+            font-size: 1.8rem;
+            cursor: none;
+            background: none;
+            border: none;
+            transition: color .3s
+        }
+
+        .lbc:hover {
+            color: var(--cream)
+        }
+
+        @keyframes fu {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes fr {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes fl {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        @keyframes scr {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cur" id="cur"></div>
+    <div class="cur-r" id="curR"></div>
+
+    <nav id="nb">
+        <a href="#" class="logo">Julia<b>.</b></a>
+        <ul class="nl">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#processo">Processo</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato" class="ncta">Trabalhe Comigo</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hg">
+            <div>
+                <div class="htag">UGC Creator &amp; Content Strategist</div>
+                <h1>Conteúdo que <em>converte</em> e encanta</h1>
+                <p class="hdesc">Crio vídeos e fotos autênticos para marcas que querem se conectar de verdade com seu
+                    público. Do briefing à entrega, cada detalhe pensado para você.</p>
+                <div class="hact">
+                    <a href="#portfolio" class="bp">Ver Portfólio</a>
+                    <a href="#contato" class="bg2"><span class="arr">→</span>Falar Comigo</a>
+                </div>
+            </div>
+            <div class="hv">
+                <div class="him">
+                    <div
+                        style="width:100%;height:100%;background:linear-gradient(160deg,#ffffff,#a2b2c6,#041e42);display:flex;align-items:flex-end;justify-content:flex-end;padding:32px;">
+                        <div
+                            style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:rgba(255,255,255,.9);line-height:1.4;text-align:right;">
+                            "Autenticidade é<br>a minha assinatura"</div>
+                    </div>
+                    <div class="hio"></div>
+                </div>
+                <div class="hfc"><span class="n">+3M</span><span class="l">Views Gerados</span></div>
+                <div class="hfp">🔥 Disponível para Projetos</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ss">
+        <div class="si">
+            <div class="rev">
+                <div class="sn">*** <span>+</span></div>
+                <div class="sl">Projetos Entregues</div>
+            </div>
+            <div class="rev">
+                <div class="sn">*** <span>+</span></div>
+                <div class="sl">Marcas Parceiras</div>
+            </div>
+            <div class="rev">
+                <div class="sn">*** <span>+</span></div>
+                <div class="sl">Visualizações Orgânicas</div>
+            </div>
+            <div class="rev">
+                <div class="sn">98 <span>%</span></div>
+                <div class="sl">Taxa de Satisfação</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bs">
+        <p class="bl">Marcas que já confiaram no meu trabalho</p>
+        <div class="btw">
+            <div class="bt">
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span><span
+                    class="bi">***</span><span class="bi">***</span><span class="bi">***</span><span
+                    class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span><span
+                    class="bi">***</span><span class="bi">***</span><span class="bi">***</span><span
+                    class="bi">***</span><span class="bi">***</span>
+            </div>
+        </div>
+    </div>
+
+    <section id="sobre">
+        <div class="inner">
+            <div class="ag">
+                <div class="ai-wrap rev">
+                    <div class="ai1">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#ffffff,#a2b2c6,#041e42)">
+                        </div>
+                    </div>
+                    <div class="ai2">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#a2b2c6,#041e42)"></div>
+                    </div>
+                </div>
+                <div class="at rev">
+                    <div class="stag">Sobre Mim</div>
+                    <div class="stit">Criadora movida por <em>resultados</em></div>
+                    <div class="gl"></div>
+                    <p>Olá! Sou <strong>Julia Figueiredo</strong>, criadora de conteúdo UGC especializada em beleza,
+                        lifestyle e bem-estar. Com mais de * anos de experiência, transformo briefings em conteúdo
+                        autêntico que gera conversão real.</p>
+                    <p>Entendo que cada marca tem sua linguagem e personalidade. Por isso, meu trabalho começa sempre
+                        ouvindo você, seus valores, público e objetivos.</p>
+                    <p>Sou <strong>referência em storytelling visual</strong>, com conhecimento profundo em edição de
+                        vídeo, fotografia de produto e direção de cena DIY que funciona de verdade.</p>
+                    <div class="sk">
+                        <span>Vídeo UGC</span><span>Fotografia</span><span>TikTok</span><span>Reels</span>
+                        <span>Roteirização</span><span>Edição de
+                            Vídeo</span><span>Review</span><span>Unboxing</span><span>Tutorial</span><span>GRWM</span>
+                    </div>
+                    <div class="sig">Julia F.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="ps">
+        <div class="inner">
+            <div class="th">
+                <div>
+                    <div class="stag">Portfólio</div>
+                    <div class="stit">Trabalhos <em>selecionados</em></div>
+                </div>
+                <div class="tn">
+                    <button class="tb a" data-t="v">🎬 Vídeos</button>
+                    <button class="tb" data-t="f">📸 Fotos</button>
+                </div>
+            </div>
+
+            <div class="pp a" id="tv">
+                <div class="vg">
+                    <div class="vc vcf">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#020f21,#041e42,#0a3166)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Título da campanha</div>
+                                <div class="vv">*** visualizações · TikTok</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#041e42,#1c3e6b,#3a5f94)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Titulo da campanha</div>
+                                <div class="vv">*** visualizações · Reels</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#041e42,#2b4e7e,#567cb3)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Titulo da campanha</div>
+                                <div class="vv">*** visualizações · TikTok</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#020f21,#15355e,#2a5285)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Título da campanha</div>
+                                <div class="vv">*** visualizações · TikTok</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#041e42,#0b2d5a,#1d4a85)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Titulo da campanha</div>
+                                <div class="vv">*** visualizações · Reels</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#010a17,#041e42,#123b70)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Título da campanha</div>
+                                <div class="vv">*** visualizações · TikTok</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#0a2a57,#153e75,#2e62a3)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Titulo da campanha</div>
+                                <div class="vv">*** visualizações · TikTok</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vc">
+                        <div style="width:100%;height:100%;background:linear-gradient(160deg,#041e42,#041e42,#3a5f94)">
+                        </div>
+                        <div class="vo">
+                            <div class="pl">▶</div>
+                            <div>
+                                <div class="vb">***</div>
+                                <div class="vt">Titulo da campanha</div>
+                                <div class="vv">*** visualizações · Reels</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pp" id="tf">
+                <div class="pg">
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:320px;background:linear-gradient(135deg,#a2b2c6,#041e42);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Product Shot</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:240px;background:linear-gradient(135deg,#829bb8,#020f21);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Lifestyle</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:380px;background:linear-gradient(135deg,#c3d1e0,#041e42);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Campaign</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:280px;background:linear-gradient(135deg,#dbe3eb,#1c3e6b);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Flat Lay</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:360px;background:linear-gradient(135deg,#a2b2c6,#15355e);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>In-Use</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:220px;background:linear-gradient(135deg,#ffffff,#2b4e7e);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Texture Shot</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:300px;background:linear-gradient(135deg,#e8eef5,#041e42);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Color Story</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:260px;background:linear-gradient(135deg,#b5c5d6,#0a2a57);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Portrait</div>
+                        </div>
+                    </div>
+                    <div class="pi" onclick="opnLb()">
+                        <div style="height:340px;background:linear-gradient(135deg,#ffffff,#041e42);border-radius:16px">
+                        </div>
+                        <div class="pov">
+                            <div class="pot">***<br>Unboxing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="processo">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Como Funciona</div>
+                <div class="stit">Do briefing à <em>entrega</em></div>
+                <p class="ssub">Um processo claro e colaborativo para garantir que o conteúdo final reflita a essência
+                    da sua marca.</p>
+            </div>
+            <div class="pg2">
+                <div class="pc rev">
+                    <div class="pn">01</div>
+                    <div class="ico">📋</div>
+                    <h3>Briefing</h3>
+                    <p>Conversamos sobre sua marca, objetivos e público-alvo. Quanto mais detalhes, melhor o resultado.
+                    </p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">02</div>
+                    <div class="ico">✍️</div>
+                    <h3>Conceito</h3>
+                    <p>Desenvolvo roteiro, moodboard e estratégia criativa alinhados à identidade da marca.</p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">03</div>
+                    <div class="ico">🎬</div>
+                    <h3>Produção</h3>
+                    <p>Gravação e edição com atenção a cada detalhe. Entrego na qualidade e formato que você precisa.
+                    </p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">04</div>
+                    <div class="ico">🚀</div>
+                    <h3>Entrega</h3>
+                    <p>Até 2 revisões incluídas. Arquivos prontos para publicação com todos os direitos de uso cedidos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="tss">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Depoimentos</div>
+                <h2>O que as <em>marcas</em> dizem</h2>
+            </div>
+            <div class="tg">
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">A Julia entendeu perfeitamente a voz da nossa marca. O conteúdo converteu 3x mais do
+                        que nossos anúncios tradicionais. Resultado incrível!</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">Marketing Manager · ***</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">Trabalhar com a Julia foi uma experiência incrível do início ao fim. Super
+                        profissional, criativa e entrega sempre antes do prazo!</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">Social Media · ***</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">O conteúdo da Julia tem aquela autenticidade que é impossível de fabricar. Nosso
+                        engajamento aumentou 200% na semana do lançamento!</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">Brand Director · ***</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="inner">
+            <div class="rev" style="text-align:center;max-width:600px;margin:0 auto 80px">
+                <div class="stag" style="justify-content:center">Contato</div>
+                <div class="stit">Vamos criar algo <em>incrível</em> juntos?</div>
+                <p class="ssub" style="margin:0 auto">Disponível para parcerias, projetos pontuais e contratos mensais.
+                    Preencha e retorno em até 24h.</p>
+            </div>
+            <div class="cg">
+                <div class="ci rev">
+                    <h3>Fale diretamente comigo</h3>
+                    <p>Prefere uma conversa mais rápida? Me chama em qualquer um dos canais abaixo. Adoro conhecer novas
+                        marcas!</p>
+                    <div class="cd">
+                        <div class="cit">
+                            <div class="cic">📧</div>
+                            <div>
+                                <div class="cil">E-mail</div>
+                                <div class="civ">emaildajuju@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="cit">
+                            <div class="cic">📱</div>
+                            <div>
+                                <div class="cil">WhatsApp</div>
+                                <div class="civ">+55 (82) 99624-1281</div>
+                            </div>
+                        </div>
+                        <div class="cit">
+                            <div class="cic">📍</div>
+                            <div>
+                                <div class="cil">Localização</div>
+                                <div class="civ">Maceió - AL — atendo globalmente</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slnk">
+                        <a href="#">🎵</a><a href="#">📸</a><a href="#">▶</a><a href="#"
+                            style="font-size:.75rem;font-weight:500">in</a>
+                    </div>
+                </div>
+                <div class="cf rev"
+                    style="background: var(--warm); border: 1px solid rgba(4, 30, 66, .1); border-radius: 24px; padding: 48px 40px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 24px;">
+                    <div
+                        style="width: 64px; height: 64px; background: rgba(4, 30, 66, .05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        📱
+                    </div>
+
+                    <div>
+                        <h3
+                            style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--dark); margin-bottom: 12px; font-weight: 300;">
+                            Vamos simplificar?</h3>
+                        <p
+                            style="font-size: .95rem; color: var(--muted); line-height: 1.6; max-width: 300px; margin: 0 auto;">
+                            Pule as formalidades! Me chame direto no WhatsApp e vamos bater um papo rápido sobre o seu
+                            projeto.</p>
+                    </div>
+
+                    <a href="https://wa.me/5582999990000?text=Olá,%20Julia!%20Vim%20pelo%20seu%20portfólio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
+                        target="_blank" class="bp"
+                        style="width: 100%; text-align: center; margin-top: 10px; cursor: none;">
+                        CHAMAR NO WHATSAPP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="fl">Julia<b>.</b></div>
+        <p class="ft">© 2026 Julia Figueiredo UGC · Todos os direitos reservados</p>
+
+    </footer>
+
+    <div class="lb" id="lb" onclick="clsLb()">
+        <button class="lbc" onclick="event.stopPropagation();clsLb()">✕</button>
+        <div
+            style="width:600px;max-width:90vw;height:400px;background:linear-gradient(135deg,#1c3e6b,#041e42);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem">
+            Imagem em tamanho real</div>
+    </div>
+
+    <script>
+        const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+        setInterval(() => { rx += (mx - rx) * .12; ry += (my - ry) * .12; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; }, 16);
+        document.querySelectorAll('a,button,.vc,.pi,.tb,.sk span').forEach(el => {
+            el.addEventListener('mouseenter', () => curR.classList.add('hov'));
+            el.addEventListener('mouseleave', () => curR.classList.remove('hov'));
+        });
+        window.addEventListener('scroll', () => document.getElementById('nb').classList.toggle('s', scrollY > 60));
+        document.querySelectorAll('.tb').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('.tb').forEach(x => x.classList.remove('a'));
+            document.querySelectorAll('.pp').forEach(x => x.classList.remove('a'));
+            b.classList.add('a');
+            document.getElementById('t' + b.dataset.t).classList.add('a');
+        }));
+        const obs = new IntersectionObserver(entries => entries.forEach((e, i) => {
+            if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i * 60); obs.unobserve(e.target); }
+        }), { threshold: .1 });
+        document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+        function opnLb() { document.getElementById('lb').classList.add('op'); }
+        function clsLb() { document.getElementById('lb').classList.remove('op'); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') clsLb(); });
+    </script>
+</body>
+
+</html>
