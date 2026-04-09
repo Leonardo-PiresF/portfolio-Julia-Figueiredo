@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Figueiredo — Social Media</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #ffffff;
+            --warm: #fdf8f9;
+            --dark: #041e42;
+            --muted: rgba(4, 30, 66, 0.65);
+            --surf: rgba(4, 30, 66, .06);
+            --gold-l: #4a6488;
+            /* ── cor secundária ── */
+            --pink: #ffc0cb;
+            --pink-d: #b5798a;
+            /* tom escuro do pink para texto legível */
+            --pink-l: rgba(255, 192, 203, .14);
+            --pink-m: rgba(255, 192, 203, .32)
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: auto
+                /* sem cursor personalizado */
+        }
+
+        /* ─────────────────── NAV ─────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 22px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, .88);
+            border-bottom: 1px solid rgba(255, 192, 203, .3);
+            transition: padding .4s
+        }
+
+        nav.s {
+            padding: 14px 60px;
+            background: rgba(255, 255, 255, .97)
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--dark);
+            text-decoration: none
+        }
+
+        .logo b {
+            color: var(--pink-d);
+            font-weight: 400
+        }
+
+        .nl {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center
+        }
+
+        .nl a {
+            font-size: .78rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .3s;
+            position: relative
+        }
+
+        .nl a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--pink-d);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
+        }
+
+        .nl a:hover {
+            color: var(--dark)
+        }
+
+        .nl a:hover::after {
+            transform: scaleX(1)
+        }
+
+        .ncta {
+            padding: 10px 28px !important;
+            border: 1px solid var(--dark) !important;
+            color: var(--dark) !important;
+            border-radius: 100px !important;
+            transition: background .3s, color .3s !important
+        }
+
+        .ncta:hover {
+            background: var(--dark) !important;
+            color: var(--cream) !important
+        }
+
+        .ncta::after {
+            display: none !important
+        }
+
+        /* link "ver portfólio UGC" na nav */
+        .nav-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 9px 22px;
+            border: 1px solid rgba(4, 30, 66, .18);
+            border-radius: 100px;
+            transition: all .3s;
+            white-space: nowrap
+        }
+
+        .nav-switch::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--pink);
+            flex-shrink: 0
+        }
+
+        .nav-switch:hover {
+            border-color: var(--pink-d);
+            color: var(--pink-d)
+        }
+
+        .nav-switch::after {
+            display: none !important
+        }
+
+        /* ─────────────────── HERO ─────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 80px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 72% 48%, rgba(255, 192, 203, .22), transparent 70%),
+                radial-gradient(ellipse 40% 40% at 18% 82%, rgba(255, 192, 203, .10), transparent 60%),
+                radial-gradient(ellipse 30% 30% at 90% 12%, rgba(4, 30, 66, .04), transparent 60%)
+        }
+
+        .hg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1
+        }
+
+        .htag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--pink-d);
+            margin-bottom: 28px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .2s forwards
+        }
+
+        .htag::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--pink-d)
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fu .9s .4s forwards
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--pink-d)
+        }
+
+        .hdesc {
+            margin-top: 28px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 440px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .6s forwards
+        }
+
+        .hact {
+            margin-top: 44px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fu .8s .8s forwards
+        }
+
+        .bp {
+            padding: 14px 36px;
+            background: var(--dark);
+            color: var(--cream);
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .82rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .3s;
+            box-shadow: 0 8px 32px rgba(4, 30, 66, .25)
+        }
+
+        .bp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 44px rgba(4, 30, 66, .35)
+        }
+
+        .bp-pink {
+            padding: 14px 36px;
+            background: var(--pink);
+            color: var(--dark);
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .82rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .3s;
+            box-shadow: 0 8px 32px rgba(255, 192, 203, .5)
+        }
+
+        .bp-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 44px rgba(255, 192, 203, .7)
+        }
+
+        .bg2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .82rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .bg2:hover {
+            color: var(--dark)
+        }
+
+        .arr {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(4, 30, 66, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s
+        }
+
+        .bg2:hover .arr {
+            border-color: var(--pink-d);
+            background: var(--pink-d);
+            color: white
+        }
+
+        /* hero visual column — grade de "phones" */
+        .hv {
+            position: relative;
+            opacity: 0;
+            transform: translateX(40px);
+            animation: fr 1s .5s forwards
+        }
+
+        .phone-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            align-items: flex-start
+        }
+
+        .phone-card {
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            position: relative;
+            box-shadow: 0 16px 48px rgba(4, 30, 66, .13)
+        }
+
+        .phone-card:nth-child(2) {
+            margin-top: 40px
+        }
+
+        .phone-card:nth-child(3) {
+            margin-top: 20px
+        }
+
+        /* ── IMAGEM de capa do card ──────────────────────────────────────────────
+           Para colocar sua imagem:
+             1. Apague o <div class="phone-ph"> (o placeholder colorido)
+             2. Descomente a linha com <img> e preencha src=""
+        ──────────────────────────────────────────────────────────────────────── */
+        .phone-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .phone-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        /* placeholder — remova quando tiver imagem */
+
+        .phone-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4, 30, 66, .7) 0%, transparent 55%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 14px
+        }
+
+        .phone-plat {
+            font-size: .62rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 3px
+        }
+
+        .phone-title {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .9);
+            line-height: 1.3
+        }
+
+        .hfc {
+            position: absolute;
+            bottom: -24px;
+            left: -40px;
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 20px 28px;
+            box-shadow: 0 20px 60px rgba(4, 30, 66, .12);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            animation: fl 4s ease-in-out infinite
+        }
+
+        .hfc .n {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--pink-d)
+        }
+
+        .hfc .l {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .hfp {
+            position: absolute;
+            top: 32px;
+            right: -20px;
+            background: var(--pink);
+            color: var(--dark);
+            border-radius: 100px;
+            padding: 10px 20px;
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            font-weight: 500;
+            animation: fl 5s ease-in-out infinite reverse;
+            box-shadow: 0 8px 24px rgba(255, 192, 203, .5)
+        }
+
+        /* ─────────────────── STATS ─────────────────── */
+        .ss {
+            padding: 60px;
+            border-top: 1px solid rgba(255, 192, 203, .35);
+            border-bottom: 1px solid rgba(255, 192, 203, .35);
+            background: var(--pink-l)
+        }
+
+        .si {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px
+        }
+
+        .sn {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--dark);
+            line-height: 1
+        }
+
+        .sn span {
+            color: var(--pink-d);
+            font-size: 2rem
+        }
+
+        .sl {
+            font-size: .75rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        /* ─────────────────── SEÇÕES ─────────────────── */
+        section {
+            padding: 120px 60px
+        }
+
+        .inner {
+            max-width: 1400px;
+            margin: 0 auto
+        }
+
+        .stag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--pink-d);
+            margin-bottom: 20px
+        }
+
+        .stag::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--pink-d)
+        }
+
+        .stit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 20px
+        }
+
+        .stit em {
+            font-style: italic;
+            color: var(--pink-d)
+        }
+
+        .ssub {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 520px
+        }
+
+        /* ─────────────────── SOBRE ─────────────────── */
+        .ag {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            margin-top: 80px
+        }
+
+        .ai-wrap {
+            position: relative;
+            min-height: 500px
+        }
+
+        .ai1 {
+            width: 75%;
+            aspect-ratio: 2/3;
+            border-radius: 200px 200px 4px 4px;
+            overflow: hidden
+        }
+
+        /* ── FOTO SOBRE — principal ──────────────────────────────────────────────
+           Para colocar sua foto:
+             1. Apague o <div class="ai1-ph">
+             2. Descomente <img> e preencha src=""
+        ──────────────────────────────────────────────────────────────────────── */
+        .ai1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .ai1-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        .ai2 {
+            position: absolute;
+            right: 0;
+            bottom: -40px;
+            width: 55%;
+            aspect-ratio: 1;
+            border-radius: 4px 100px 4px 100px;
+            border: 8px solid var(--cream);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(4, 30, 66, .1)
+        }
+
+        /* ── FOTO SOBRE — secundária ─────────────────────────────────────────────
+           Para colocar sua foto:
+             Descomente <img> e preencha src=""
+        ──────────────────────────────────────────────────────────────────────── */
+        .ai2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .at p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--muted);
+            margin-bottom: 20px
+        }
+
+        .at p strong {
+            color: var(--dark);
+            font-weight: 500
+        }
+
+        .sk {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 36px
+        }
+
+        .sk span {
+            padding: 8px 18px;
+            border: 1px solid rgba(255, 192, 203, .55);
+            border-radius: 100px;
+            font-size: .78rem;
+            color: var(--muted);
+            background: var(--pink-l);
+            transition: all .3s;
+            cursor: default
+        }
+
+        .sk span:hover {
+            border-color: var(--pink-d);
+            color: var(--pink-d)
+        }
+
+        .sig {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            color: var(--pink-d);
+            margin-top: 36px
+        }
+
+        .gl {
+            width: 60px;
+            height: 1px;
+            background: var(--pink-d);
+            margin: 32px 0
+        }
+
+        /* ─────────────────── PORTFÓLIO ─────────────────── */
+        .ps {
+            background: var(--warm)
+        }
+
+        .th {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+
+        .tn {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 192, 203, .15);
+            border-radius: 100px;
+            padding: 4px
+        }
+
+        .tb {
+            padding: 10px 28px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .8rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .tb.a {
+            background: var(--dark);
+            color: var(--cream);
+            box-shadow: 0 4px 16px rgba(4, 30, 66, .2)
+        }
+
+        .pp {
+            display: none
+        }
+
+        .pp.a {
+            display: block;
+            animation: fadeIn .4s ease
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* ── GRADE DE FEED (fotos / carrosséis) ── */
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .feed-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            transition: transform .4s, box-shadow .4s
+        }
+
+        .feed-item.tall {
+            aspect-ratio: 4/5
+        }
+
+        .feed-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16/9
+        }
+
+        .feed-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px rgba(4, 30, 66, .13)
+        }
+
+        /* ── IMAGEM de feed ──────────────────────────────────────────────────────
+           Para cada item:
+             1. Apague o <div class="feed-ph"> (placeholder colorido)
+             2. Descomente <img> e preencha src="" e alt=""
+        ──────────────────────────────────────────────────────────────────────── */
+        .feed-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .feed-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        .feed-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4, 30, 66, .82) 0%, transparent 52%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .feed-item:hover .feed-overlay {
+            opacity: 1
+        }
+
+        .feed-brand {
+            font-size: .68rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 4px
+        }
+
+        .feed-cap {
+            font-size: .9rem;
+            color: white;
+            line-height: 1.35
+        }
+
+        /* ── GRADE DE REELS/VÍDEOS ── */
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px
+        }
+
+        .reel-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: pointer;
+            transition: transform .4s, box-shadow .4s;
+            background: var(--dark)
+        }
+
+        .reel-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16/9
+        }
+
+        .reel-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 64px rgba(4, 30, 66, .18)
+        }
+
+        /* ── VÍDEO do reel ───────────────────────────────────────────────────────
+           Para cada reel:
+             OPÇÃO A — vídeo hospedado (MP4):
+               Descomente <video> e preencha src="" e poster=""
+               O atributo poster="" é a thumbnail mostrada antes do hover.
+
+             OPÇÃO B — embed do Google Drive (link público):
+               Descomente <iframe> e cole o link embed do Drive.
+               Formato: https://drive.google.com/file/d/SEU_ID/preview
+
+             OPÇÃO C — embed do YouTube (não listado):
+               Descomente <iframe> com src do youtube/embed/...
+
+             Apague o <div class="reel-ph"> quando tiver conteúdo.
+        ──────────────────────────────────────────────────────────────────────── */
+        .reel-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .reel-item iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block
+        }
+
+        .reel-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        .reel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4, 30, 66, .85) 0%, rgba(4, 30, 66, .1) 50%, transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            opacity: .85;
+            transition: opacity .3s
+        }
+
+        .reel-item:hover .reel-overlay {
+            opacity: 1
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(.8);
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: all .3s
+        }
+
+        .reel-item:hover .play-btn {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1)
+        }
+
+        .reel-plat {
+            font-size: .7rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 4px
+        }
+
+        .reel-title {
+            font-size: .95rem;
+            color: white;
+            line-height: 1.3
+        }
+
+        .reel-views {
+            margin-top: 6px;
+            font-size: .72rem;
+            color: rgba(255, 255, 255, .55)
+        }
+
+        /* ── GRADE DE STORIES ── */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px
+        }
+
+        .story-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: pointer;
+            transition: transform .4s, box-shadow .4s;
+            background: var(--dark)
+        }
+
+        .story-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(4, 30, 66, .15)
+        }
+
+        /* ── IMAGEM / VÍDEO do story ─────────────────────────────────────────────
+           Para cada story:
+             Descomente <img> ou <video> e preencha src=""
+             Apague o <div class="story-ph">
+        ──────────────────────────────────────────────────────────────────────── */
+        .story-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .story-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .story-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        .story-ring {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            right: 12px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(to right, var(--pink) 40%, rgba(255, 255, 255, .2))
+        }
+
+        .story-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 14px;
+            background: linear-gradient(to top, rgba(4, 30, 66, .7), transparent);
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .8);
+            text-align: center
+        }
+
+        /* ─────────────────── PLATAFORMAS ─────────────────── */
+        .plat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 80px
+        }
+
+        .plat-card {
+            padding: 40px 32px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 192, 203, .3);
+            background: linear-gradient(145deg, var(--pink-l), rgba(255, 255, 255, .6));
+            position: relative;
+            overflow: hidden;
+            transition: all .4s
+        }
+
+        .plat-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 192, 203, .4), transparent 70%)
+        }
+
+        .plat-card:hover {
+            border-color: var(--pink);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(255, 192, 203, .2)
+        }
+
+        .plat-icon {
+            font-size: 2.2rem;
+            margin-bottom: 20px
+        }
+
+        .plat-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 10px
+        }
+
+        .plat-desc {
+            font-size: .88rem;
+            line-height: 1.75;
+            color: var(--muted)
+        }
+
+        .plat-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px
+        }
+
+        .plat-tag {
+            font-size: .68rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 192, 203, .5);
+            background: rgba(255, 192, 203, .12);
+            color: var(--pink-d)
+        }
+
+        /* ─────────────────── RESULTADOS / MÉTRICAS ─────────────────── */
+        .mts {
+            background: var(--dark);
+            padding: 120px 60px
+        }
+
+        .mts .stag {
+            color: var(--pink)
+        }
+
+        .mts .stag::before {
+            background: var(--pink)
+        }
+
+        .mts .stit {
+            color: var(--cream)
+        }
+
+        .mts .stit em {
+            color: var(--pink)
+        }
+
+        .mts .ssub {
+            color: rgba(255, 255, 255, .6)
+        }
+
+        .mg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px
+        }
+
+        .mc {
+            padding: 40px 32px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: all .4s
+        }
+
+        .mc:hover {
+            background: rgba(255, 192, 203, .06);
+            border-color: rgba(255, 192, 203, .25);
+            transform: translateY(-4px)
+        }
+
+        .mc-n {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--pink);
+            margin-bottom: 10px
+        }
+
+        .mc-n sup {
+            font-size: 2rem
+        }
+
+        .mc-l {
+            font-size: .9rem;
+            color: rgba(255, 255, 255, .75);
+            margin-bottom: 8px
+        }
+
+        .mc-brand {
+            font-size: .7rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .3)
+        }
+
+        /* Card com imagem/print de resultado */
+        .mc-img {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3
+        }
+
+        /* ── PRINT DE RESULTADO ──────────────────────────────────────────────────
+           Descomente <img> e preencha src="" com o print dos insights/analytics
+           Apague o <div class="mc-img-ph">
+        ──────────────────────────────────────────────────────────────────────── */
+        .mc-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .mc-img-ph {
+            width: 100%;
+            height: 100%
+        }
+
+        .mc-img-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(4, 30, 66, .9), transparent 60%);
+            font-size: .82rem;
+            color: white;
+            line-height: 1.4
+        }
+
+        /* ─────────────────── PROCESSO ─────────────────── */
+        .pg2 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px
+        }
+
+        .pc {
+            padding: 40px 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 192, 203, .25);
+            background: linear-gradient(145deg, var(--pink-l), rgba(255, 255, 255, .5));
+            position: relative;
+            overflow: hidden;
+            transition: all .4s
+        }
+
+        .pc::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 192, 203, .1), transparent 60%);
+            opacity: 0;
+            transition: opacity .4s
+        }
+
+        .pc:hover {
+            border-color: var(--pink);
+            transform: translateY(-6px)
+        }
+
+        .pc:hover::before {
+            opacity: 1
+        }
+
+        .pn {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: rgba(255, 192, 203, .4);
+            line-height: 1;
+            margin-bottom: 20px
+        }
+
+        .ico {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--pink), var(--pink-d));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px
+        }
+
+        .pc h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 12px
+        }
+
+        .pc p {
+            font-size: .88rem;
+            line-height: 1.7;
+            color: var(--muted)
+        }
+
+        /* ─────────────────── DEPOIMENTOS ─────────────────── */
+        .tss {
+            background: var(--dark);
+            padding: 120px 60px
+        }
+
+        .tss .stag {
+            color: var(--pink)
+        }
+
+        .tss .stag::before {
+            background: var(--pink)
+        }
+
+        .tss h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--cream)
+        }
+
+        .tss h2 em {
+            color: var(--pink)
+        }
+
+        .tg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 60px
+        }
+
+        .tc {
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: all .4s
+        }
+
+        .tc:hover {
+            background: rgba(255, 192, 203, .06);
+            border-color: rgba(255, 192, 203, .2);
+            transform: translateY(-4px)
+        }
+
+        .qm {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            line-height: .8;
+            color: var(--pink);
+            opacity: .5;
+            margin-bottom: 16px
+        }
+
+        .tt {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .8);
+            margin-bottom: 28px;
+            font-style: italic
+        }
+
+        .ta {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .av {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--pink-d));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem
+        }
+
+        .an {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--cream)
+        }
+
+        .ar {
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .55)
+        }
+
+        /* ─────────────────── CONTATO ─────────────────── */
+        .cg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+            margin-top: 80px
+        }
+
+        .ci h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 20px
+        }
+
+        .ci p {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: var(--muted);
+            margin-bottom: 40px
+        }
+
+        .cd {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .cit {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .cic {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--pink-l);
+            border: 1px solid rgba(255, 192, 203, .4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0
+        }
+
+        .cil {
+            font-size: .68rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--pink-d)
+        }
+
+        .civ {
+            font-size: .92rem;
+            color: var(--dark)
+        }
+
+        .slnk {
+            display: flex;
+            gap: 14px;
+            margin-top: 40px
+        }
+
+        .slnk a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(4, 30, 66, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: all .3s
+        }
+
+        .slnk a:hover {
+            border-color: var(--pink-d);
+            color: var(--dark);
+            background: var(--pink);
+            transform: translateY(-2px)
+        }
+
+        /* ─────────────────── BRAND SCROLL ─────────────────── */
+        .bs {
+            padding: 80px 60px
+        }
+
+        .bl {
+            text-align: center;
+            font-size: .72rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 40px
+        }
+
+        .btw {
+            overflow: hidden
+        }
+
+        .bt {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            animation: scr 20s linear infinite;
+            width: max-content
+        }
+
+        .bi {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold-l);
+            letter-spacing: .1em;
+            white-space: nowrap;
+            transition: color .3s
+        }
+
+        .bi:hover {
+            color: var(--pink-d)
+        }
+
+        /* ─────────────────── FOOTER ─────────────────── */
+        footer {
+            padding: 60px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+
+        .fl {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--cream)
+        }
+
+        .fl b {
+            color: var(--pink);
+            font-weight: 400
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            align-items: center
+        }
+
+        .footer-links a {
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .45);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .footer-links a:hover {
+            color: var(--pink)
+        }
+
+        .footer-links a.footer-switch {
+            padding: 8px 20px;
+            border: 1px solid rgba(255, 192, 203, .25);
+            border-radius: 100px;
+            color: rgba(255, 255, 255, .6);
+            transition: all .3s
+        }
+
+        .footer-links a.footer-switch:hover {
+            border-color: var(--pink);
+            color: var(--pink)
+        }
+
+        .ft {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .4)
+        }
+
+        /* ─────────────────── REVEAL ─────────────────── */
+        .rev {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .8s, transform .8s
+        }
+
+        .rev.vis {
+            opacity: 1;
+            transform: none
+        }
+
+        /* ─────────────────── KEYFRAMES ─────────────────── */
+        @keyframes fu {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes fr {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes fl {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        @keyframes scr {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* ─────────────────── RESPONSIVE ─────────────────── */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 18px 32px
+            }
+
+            nav.s {
+                padding: 14px 32px
+            }
+
+            .hero {
+                padding: 120px 32px 60px
+            }
+
+            .hg {
+                grid-template-columns: 1fr;
+                gap: 60px
+            }
+
+            .phone-row {
+                max-width: 400px
+            }
+
+            section {
+                padding: 80px 32px
+            }
+
+            .ss {
+                padding: 48px 32px
+            }
+
+            .si {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .ag {
+                grid-template-columns: 1fr;
+                gap: 60px
+            }
+
+            .ai-wrap {
+                min-height: 380px
+            }
+
+            .feed-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .reels-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stories-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .plat-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .mg {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .pg2 {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .tg {
+                grid-template-columns: 1fr
+            }
+
+            .cg {
+                grid-template-columns: 1fr;
+                gap: 60px
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 16px 20px
+            }
+
+            .nl {
+                gap: 20px
+            }
+
+            .nav-switch span {
+                display: none
+            }
+
+            .hero {
+                padding: 100px 20px 40px
+            }
+
+            section {
+                padding: 60px 20px
+            }
+
+            .ss,
+            .bs,
+            .tss {
+                padding: 60px 20px
+            }
+
+            .si {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .feed-grid,
+            .reels-grid {
+                grid-template-columns: 1fr
+            }
+
+            .reel-item.wide {
+                grid-column: span 1;
+                aspect-ratio: 9/16
+            }
+
+            .feed-item.wide {
+                grid-column: span 1;
+                aspect-ratio: 1
+            }
+
+            .stories-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .plat-grid {
+                grid-template-columns: 1fr
+            }
+
+            .mg {
+                grid-template-columns: 1fr
+            }
+
+            .pg2 {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 40px 20px;
+                text-align: center
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ NAV ═══════════════ -->
+    <nav id="nb">
+        <a href="social-media.html" class="logo">Julia<b>.</b></a>
+        <ul class="nl">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#plataformas">Plataformas</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#contato" class="ncta">Trabalhe Comigo</a></li>
+        </ul>
+        <!-- Link cruzado para o portfólio UGC -->
+        <a href="index.html" class="nav-switch">Ver Portfólio UGC</a>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hg">
+            <div>
+                <div class="htag">Social Media Manager &amp; Criadora de Conteúdo</div>
+                <h1>Redes que <em>engajam</em><br>e geram resultados</h1>
+                <p class="hdesc">Cuido da presença digital da sua marca do planejamento ao post — com estratégia,
+                    estética e dados. Feed coerente, conteúdo que vende, comunidade que cresce.</p>
+                <div class="hact">
+                    <a href="#portfolio" class="bp-pink">Ver Portfólio</a>
+                    <a href="#contato" class="bg2"><span class="arr">→</span>Falar Comigo</a>
+                </div>
+            </div>
+            <div class="hv">
+                <div class="hfp">🌸 Social Media</div>
+                <div class="phone-row">
+
+                    <!-- ── Card 1: Feed Post ─────────────────────────────
+                         Apague .phone-ph e descomente <img> com sua imagem
+                    ─────────────────────────────────────────────────── -->
+                    <div class="phone-card">
+                        <!-- <img src="sua-imagem-feed.jpg" alt="Post do Feed"> -->
+                        <div class="phone-ph" style="background:linear-gradient(160deg,#ffc0cb,#b5798a,#041e42)"></div>
+                        <div class="phone-overlay">
+                            <div class="phone-plat">Instagram</div>
+                            <div class="phone-title">Feed Post</div>
+                        </div>
+                    </div>
+
+                    <!-- ── Card 2: Reels/TikTok ───────────────────────────
+                         Apague .phone-ph e descomente <img> com thumbnail
+                    ─────────────────────────────────────────────────── -->
+                    <div class="phone-card">
+                        <!-- <img src="sua-thumb-reel.jpg" alt="Reel"> -->
+                        <div class="phone-ph" style="background:linear-gradient(160deg,#041e42,#4a6488,#ffc0cb)"></div>
+                        <div class="phone-overlay">
+                            <div class="phone-plat">TikTok / Reels</div>
+                            <div class="phone-title">Vídeo</div>
+                        </div>
+                    </div>
+
+                    <!-- ── Card 3: Stories ───────────────────────────────
+                         Apague .phone-ph e descomente <img> com sua imagem
+                    ─────────────────────────────────────────────────── -->
+                    <div class="phone-card">
+                        <!-- <img src="sua-imagem-story.jpg" alt="Story"> -->
+                        <div class="phone-ph" style="background:linear-gradient(160deg,#b5798a,#ffc0cb,#041e42)"></div>
+                        <div class="phone-overlay">
+                            <div class="phone-plat">Stories</div>
+                            <div class="phone-title">Instagram</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="hfc">
+                    <span class="n">+200<span style="font-size:1.8rem">%</span></span>
+                    <span class="l">Crescimento médio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ STATS ═══════════════ -->
+    <div class="ss">
+        <div class="si">
+            <div class="rev">
+                <div class="sn">*** <span>+</span></div>
+                <div class="sl">Marcas Gerenciadas</div>
+            </div>
+            <div class="rev">
+                <div class="sn">*** <span>M</span></div>
+                <div class="sl">Impressões Geradas</div>
+            </div>
+            <div class="rev">
+                <div class="sn">*** <span>%</span></div>
+                <div class="sl">Taxa de Engajamento</div>
+            </div>
+            <div class="rev">
+                <div class="sn">*** <span>+</span></div>
+                <div class="sl">Seguidores Conquistados</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ MARCAS ═══════════════ -->
+    <div class="bs">
+        <p class="bl">Marcas que já confiei a gestão das redes</p>
+        <div class="btw">
+            <div class="bt">
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span><span class="bi">***</span>
+                <span class="bi">***</span><span class="bi">***</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SOBRE ═══════════════ -->
+    <section id="sobre">
+        <div class="inner">
+            <div class="ag">
+                <div class="ai-wrap rev">
+
+                    <!-- ── FOTO PRINCIPAL ────────────────────────────────
+                         Apague .ai1-ph e descomente <img> com src=""
+                    ─────────────────────────────────────────────────── -->
+                    <div class="ai1">
+                        <!-- <img src="sua-foto-principal.jpg" alt="Julia Figueiredo"> -->
+                        <div class="ai1-ph" style="background:linear-gradient(160deg,#ffc0cb,#b5798a,#041e42)"></div>
+                    </div>
+
+                    <!-- ── FOTO SECUNDÁRIA ───────────────────────────────
+                         Descomente <img> com src=""
+                         Apague o div inline com background
+                    ─────────────────────────────────────────────────── -->
+                    <div class="ai2">
+                        <!-- <img src="sua-foto-secundaria.jpg" alt="Bastidores"> -->
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#ffc0cb,#4a6488,#041e42)">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="at rev">
+                    <div class="stag">Sobre Mim</div>
+                    <div class="stit">Estratégia que vira <em>resultado</em></div>
+                    <div class="gl"></div>
+                    <p>Olá! Sou <strong>Julia Figueiredo</strong>, Social Media Manager especializada em criar presenças
+                        digitais que vendem. Combino estética cuidadosa, copywriting estratégico e análise de dados para
+                        que cada post tenha um propósito.</p>
+                    <p>Trabalho com marcas de <strong>moda, beleza, lifestyle e serviços</strong> que querem mais do que
+                        seguidores — querem clientes reais e comunidades engajadas.</p>
+                    <p>Cuido de tudo: planejamento mensal, criação de conteúdo, edição, legendas, hashtags e relatórios
+                        de desempenho.</p>
+                    <div class="sk">
+                        <span>Feed Strategy</span><span>Reels &amp; TikTok</span><span>Copywriting</span>
+                        <span>Calendário Editorial</span><span>Design Canva</span><span>Stories</span>
+                        <span>Hashtag Research</span><span>Analytics</span><span>Engajamento</span><span>Ads</span>
+                    </div>
+                    <div class="sig">Julia F.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PORTFÓLIO ═══════════════ -->
+    <section id="portfolio" class="ps">
+        <div class="inner">
+            <div class="th rev">
+                <div>
+                    <div class="stag">Portfólio</div>
+                    <div class="stit">Conteúdo que <em>encanta</em></div>
+                </div>
+                <div class="tn">
+                    <button class="tb a" data-t="feed">📸 Feed</button>
+                    <button class="tb" data-t="reels">🎬 Reels &amp; Vídeos</button>
+                    <button class="tb" data-t="stories">💬 Stories</button>
+                </div>
+            </div>
+
+            <!-- ──────────── TAB: FEED (fotos e carrosséis) ──────────── -->
+            <div class="pp a" id="tfeed">
+                <div class="feed-grid">
+
+                    <!-- ════════════════════════════════════════════════════
+                         FEED ITEM 1 — imagem quadrada
+                         → Apague .feed-ph
+                         → Descomente <img> e preencha src="" alt=""
+                    ════════════════════════════════════════════════════ -->
+                    <div class="feed-item rev">
+                        <!-- <img src="feed-1.jpg" alt="Nome da marca ou descrição do post"> -->
+                        <div class="feed-ph" style="background:linear-gradient(135deg,#ffc0cb,#b5798a)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Legenda ou tipo de post (ex: carrossel educativo)</div>
+                        </div>
+                    </div>
+
+                    <!-- FEED ITEM 2 — imagem wide (2 colunas) -->
+                    <div class="feed-item wide rev">
+                        <!-- <img src="feed-2.jpg" alt="Nome da marca ou descrição"> -->
+                        <div class="feed-ph" style="background:linear-gradient(135deg,#041e42,#4a6488)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Post de destaque</div>
+                        </div>
+                    </div>
+
+                    <!-- FEED ITEM 3 -->
+                    <div class="feed-item rev">
+                        <!-- <img src="feed-3.jpg" alt="Nome da marca"> -->
+                        <div class="feed-ph" style="background:linear-gradient(135deg,#b5798a,#041e42)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Tipo de post</div>
+                        </div>
+                    </div>
+
+                    <!-- FEED ITEM 4 — tall (4:5) -->
+                    <div class="feed-item tall rev">
+                        <!-- <img src="feed-4.jpg" alt="Nome da marca"> -->
+                        <div class="feed-ph" style="background:linear-gradient(160deg,#ffc0cb,#041e42)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Tipo de post</div>
+                        </div>
+                    </div>
+
+                    <!-- FEED ITEM 5 -->
+                    <div class="feed-item rev">
+                        <!-- <img src="feed-5.jpg" alt="Nome da marca"> -->
+                        <div class="feed-ph" style="background:linear-gradient(135deg,#4a6488,#ffc0cb)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Tipo de post</div>
+                        </div>
+                    </div>
+
+                    <!-- FEED ITEM 6 -->
+                    <div class="feed-item rev">
+                        <!-- <img src="feed-6.jpg" alt="Nome da marca"> -->
+                        <div class="feed-ph" style="background:linear-gradient(135deg,#041e42,#b5798a)"></div>
+                        <div class="feed-overlay">
+                            <div class="feed-brand">Nome da Marca</div>
+                            <div class="feed-cap">Tipo de post</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ──────────── TAB: REELS & VÍDEOS ──────────── -->
+            <div class="pp" id="treels">
+                <div class="reels-grid">
+
+                    <!-- ════════════════════════════════════════════════════
+                         REEL 1 — wide (destaque)
+                         OPÇÃO A — arquivo de vídeo (hospedado no servidor):
+                           <video src="reel-1.mp4" poster="thumb-1.jpg" muted loop playsinline></video>
+
+                         OPÇÃO B — embed Google Drive (deixe público, use link /preview):
+                           <iframe src="https://drive.google.com/file/d/SEU_ID_AQUI/preview"
+                                   allow="autoplay"></iframe>
+
+                         OPÇÃO C — embed YouTube (vídeo não listado):
+                           <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID?autoplay=0"
+                                   allow="accelerometer; autoplay" allowfullscreen></iframe>
+
+                         → Apague .reel-ph quando tiver conteúdo
+                    ════════════════════════════════════════════════════ -->
+                    <div class="reel-item wide rev">
+                        <!-- <video src="reel-1.mp4" poster="thumb-reel-1.jpg" muted loop playsinline></video> -->
+                        <!-- <iframe src="https://drive.google.com/file/d/SEU_ID/preview" allow="autoplay"></iframe> -->
+                        <div class="reel-ph" style="background:linear-gradient(160deg,#041e42,#4a6488,#ffc0cb)"></div>
+                        <div class="play-btn">▶</div>
+                        <div class="reel-overlay">
+                            <div class="reel-plat">Instagram Reels · Nome da Marca</div>
+                            <div class="reel-title">Título ou descrição do vídeo</div>
+                            <div class="reel-views">*** visualizações</div>
+                        </div>
+                    </div>
+
+                    <!-- REEL 2 -->
+                    <div class="reel-item rev">
+                        <!-- <video src="reel-2.mp4" poster="thumb-reel-2.jpg" muted loop playsinline></video> -->
+                        <div class="reel-ph" style="background:linear-gradient(160deg,#ffc0cb,#041e42)"></div>
+                        <div class="play-btn">▶</div>
+                        <div class="reel-overlay">
+                            <div class="reel-plat">TikTok · Nome da Marca</div>
+                            <div class="reel-title">Título do vídeo</div>
+                            <div class="reel-views">*** visualizações</div>
+                        </div>
+                    </div>
+
+                    <!-- REEL 3 -->
+                    <div class="reel-item rev">
+                        <!-- <video src="reel-3.mp4" poster="thumb-reel-3.jpg" muted loop playsinline></video> -->
+                        <div class="reel-ph" style="background:linear-gradient(160deg,#b5798a,#041e42)"></div>
+                        <div class="play-btn">▶</div>
+                        <div class="reel-overlay">
+                            <div class="reel-plat">Reels · Nome da Marca</div>
+                            <div class="reel-title">Título do vídeo</div>
+                            <div class="reel-views">*** visualizações</div>
+                        </div>
+                    </div>
+
+                    <!-- REEL 4 -->
+                    <div class="reel-item rev">
+                        <!-- <video src="reel-4.mp4" poster="thumb-reel-4.jpg" muted loop playsinline></video> -->
+                        <div class="reel-ph" style="background:linear-gradient(160deg,#041e42,#b5798a)"></div>
+                        <div class="play-btn">▶</div>
+                        <div class="reel-overlay">
+                            <div class="reel-plat">TikTok · Nome da Marca</div>
+                            <div class="reel-title">Título do vídeo</div>
+                            <div class="reel-views">*** visualizações</div>
+                        </div>
+                    </div>
+
+                    <!-- REEL 5 -->
+                    <div class="reel-item rev">
+                        <!-- <video src="reel-5.mp4" poster="thumb-reel-5.jpg" muted loop playsinline></video> -->
+                        <div class="reel-ph" style="background:linear-gradient(160deg,#4a6488,#ffc0cb)"></div>
+                        <div class="play-btn">▶</div>
+                        <div class="reel-overlay">
+                            <div class="reel-plat">Reels · Nome da Marca</div>
+                            <div class="reel-title">Título do vídeo</div>
+                            <div class="reel-views">*** visualizações</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ──────────── TAB: STORIES ──────────── -->
+            <div class="pp" id="tstories">
+                <div class="stories-grid">
+
+                    <!-- ════════════════════════════════════════════════════
+                         STORY 1
+                         → Apague .story-ph
+                         → Para imagem: descomente <img src="" alt="">
+                         → Para vídeo: descomente <video src="" muted loop playsinline>
+                    ════════════════════════════════════════════════════ -->
+                    <div class="story-item rev">
+                        <!-- <img src="story-1.jpg" alt="Story — Nome da Marca"> -->
+                        <!-- <video src="story-1.mp4" muted loop playsinline></video> -->
+                        <div class="story-ph" style="background:linear-gradient(160deg,#ffc0cb,#041e42)"></div>
+                        <div class="story-ring"></div>
+                        <div class="story-label">Nome da Marca</div>
+                    </div>
+
+                    <!-- STORY 2 -->
+                    <div class="story-item rev">
+                        <!-- <img src="story-2.jpg" alt="Story — Nome da Marca"> -->
+                        <div class="story-ph" style="background:linear-gradient(160deg,#041e42,#ffc0cb)"></div>
+                        <div class="story-ring"></div>
+                        <div class="story-label">Nome da Marca</div>
+                    </div>
+
+                    <!-- STORY 3 -->
+                    <div class="story-item rev">
+                        <!-- <img src="story-3.jpg" alt="Story — Nome da Marca"> -->
+                        <div class="story-ph" style="background:linear-gradient(160deg,#b5798a,#4a6488)"></div>
+                        <div class="story-ring"></div>
+                        <div class="story-label">Nome da Marca</div>
+                    </div>
+
+                    <!-- STORY 4 -->
+                    <div class="story-item rev">
+                        <!-- <img src="story-4.jpg" alt="Story — Nome da Marca"> -->
+                        <!-- <video src="story-4.mp4" muted loop playsinline></video> -->
+                        <div class="story-ph" style="background:linear-gradient(160deg,#4a6488,#b5798a)"></div>
+                        <div class="story-ring"></div>
+                        <div class="story-label">Nome da Marca</div>
+                    </div>
+
+                    <!-- STORY 5 -->
+                    <div class="story-item rev">
+                        <!-- <img src="story-5.jpg" alt="Story — Nome da Marca"> -->
+                        <div class="story-ph" style="background:linear-gradient(160deg,#ffc0cb,#b5798a)"></div>
+                        <div class="story-ring"></div>
+                        <div class="story-label">Nome da Marca</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════ PLATAFORMAS ═══════════════ -->
+    <section id="plataformas">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Plataformas</div>
+                <div class="stit">Onde sua marca <em>precisa estar</em></div>
+                <p class="ssub">Gestão completa nas principais redes sociais, com estratégia adaptada para cada
+                    algoritmo e formato.</p>
+            </div>
+            <div class="plat-grid">
+                <div class="plat-card rev">
+                    <div class="plat-icon">📸</div>
+                    <div class="plat-name">Instagram</div>
+                    <p class="plat-desc">Feed estratégico, Reels, Stories, Close Friends e campanhas de engajamento.
+                        Crescimento orgânico e consistente com identidade visual forte.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">Feed</span><span class="plat-tag">Reels</span>
+                        <span class="plat-tag">Stories</span><span class="plat-tag">Collab</span>
+                    </div>
+                </div>
+                <div class="plat-card rev">
+                    <div class="plat-icon">🎵</div>
+                    <div class="plat-name">TikTok</div>
+                    <p class="plat-desc">Vídeos nativos, trends adaptadas à identidade da marca e edição rápida.
+                        Estratégia para o FYP e crescimento acelerado de seguidores.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">FYP</span><span class="plat-tag">Trends</span>
+                        <span class="plat-tag">Lives</span>
+                    </div>
+                </div>
+                <div class="plat-card rev">
+                    <div class="plat-icon">📌</div>
+                    <div class="plat-name">Pinterest</div>
+                    <p class="plat-desc">Pins otimizados para SEO visual, boards estratégicos e tráfego orgânico de
+                        longo prazo — ideal para e-commerce e lifestyle.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">Pins</span><span class="plat-tag">Boards</span>
+                        <span class="plat-tag">SEO Visual</span>
+                    </div>
+                </div>
+                <div class="plat-card rev">
+                    <div class="plat-icon">▶️</div>
+                    <div class="plat-name">YouTube</div>
+                    <p class="plat-desc">Shorts que crescem rápido, thumbnails que convertem e roteiros alinhados à voz
+                        da marca.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">Shorts</span><span class="plat-tag">Thumbnails</span>
+                        <span class="plat-tag">Roteiros</span>
+                    </div>
+                </div>
+                <div class="plat-card rev">
+                    <div class="plat-icon">💼</div>
+                    <div class="plat-name">LinkedIn</div>
+                    <p class="plat-desc">Posicionamento de autoridade para marcas e pessoas físicas. Conteúdo que gera
+                        leads e abre portas no B2B.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">Autoridade</span><span class="plat-tag">B2B</span>
+                        <span class="plat-tag">Personal Brand</span>
+                    </div>
+                </div>
+                <div class="plat-card rev">
+                    <div class="plat-icon">🛍️</div>
+                    <div class="plat-name">Social Commerce</div>
+                    <p class="plat-desc">Integração de loja no Instagram e Facebook, conteúdo de produto que converte e
+                        estratégias de social selling.</p>
+                    <div class="plat-tags">
+                        <span class="plat-tag">Instagram Shop</span><span class="plat-tag">Catálogo</span>
+                        <span class="plat-tag">Conversão</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ RESULTADOS / MÉTRICAS ═══════════════ -->
+    <section id="resultados" class="mts">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Resultados</div>
+                <div class="stit">Números que <em>falam</em></div>
+                <p class="ssub">Cases reais de marcas que cresceram com gestão estratégica das redes.</p>
+            </div>
+            <div class="mg">
+
+                <div class="mc rev">
+                    <div class="mc-n">+312<sup>%</sup></div>
+                    <div class="mc-l">Crescimento em alcance orgânico</div>
+                    <div class="mc-brand">Marca de Moda · Instagram</div>
+                </div>
+
+                <div class="mc rev">
+                    <div class="mc-n">87<sup>k</sup></div>
+                    <div class="mc-l">Seguidores em 6 meses</div>
+                    <div class="mc-brand">E-commerce de Beleza · TikTok</div>
+                </div>
+
+                <div class="mc rev">
+                    <div class="mc-n">4.8<sup>%</sup></div>
+                    <div class="mc-l">Taxa média de engajamento</div>
+                    <div class="mc-brand">Clínica Estética · Instagram</div>
+                </div>
+
+                <!-- ════════════════════════════════════════════════════
+                     PRINT DE RESULTADO 1 (ex: print do Instagram Insights)
+                     → Apague .mc-img-ph
+                     → Descomente <img> e preencha src=""
+                ════════════════════════════════════════════════════ -->
+                <div class="mc-img rev">
+                    <!-- <img src="print-resultado-1.jpg" alt="Print de resultado — Instagram Insights"> -->
+                    <div class="mc-img-ph" style="background:linear-gradient(135deg,#041e42,#4a6488)"></div>
+                    <div class="mc-img-caption">Print de resultado ou gráfico de crescimento</div>
+                </div>
+
+                <!-- PRINT DE RESULTADO 2 (ex: print de analytics do TikTok) -->
+                <div class="mc-img rev">
+                    <!-- <img src="print-resultado-2.jpg" alt="Print de resultado — TikTok Analytics"> -->
+                    <div class="mc-img-ph" style="background:linear-gradient(135deg,#ffc0cb,#b5798a)"></div>
+                    <div class="mc-img-caption">Print de analytics ou relatório de desempenho</div>
+                </div>
+
+                <div class="mc rev">
+                    <div class="mc-n">2.1<sup>M</sup></div>
+                    <div class="mc-l">Views em vídeo orgânico</div>
+                    <div class="mc-brand">Food &amp; Bebidas · TikTok</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PROCESSO ═══════════════ -->
+    <section id="processo">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Como Funciona</div>
+                <div class="stit">Da estratégia ao <em>post</em></div>
+                <p class="ssub">Um fluxo de trabalho claro e colaborativo para que sua marca publique com consistência e
+                    propósito.</p>
+            </div>
+            <div class="pg2">
+                <div class="pc rev">
+                    <div class="pn">01</div>
+                    <div class="ico">🎯</div>
+                    <h3>Diagnóstico</h3>
+                    <p>Analiso sua marca, concorrência, público-alvo e o que já existe nas redes para criar uma
+                        estratégia real.</p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">02</div>
+                    <div class="ico">📅</div>
+                    <h3>Planejamento</h3>
+                    <p>Crio o calendário editorial mensal com pautas, formatos, datas e objetivos de cada publicação.
+                    </p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">03</div>
+                    <div class="ico">✨</div>
+                    <h3>Criação</h3>
+                    <p>Desenvolvo artes, vídeos, legendas e hashtags — tudo na linguagem e estética da sua marca.</p>
+                </div>
+                <div class="pc rev">
+                    <div class="pn">04</div>
+                    <div class="ico">📊</div>
+                    <h3>Análise</h3>
+                    <p>Relatório mensal com métricas, aprendizados e ajustes para o próximo mês. Dados que guiam
+                        decisões.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ DEPOIMENTOS ═══════════════ -->
+    <section id="depoimentos" class="tss">
+        <div class="inner">
+            <div class="rev">
+                <div class="stag">Depoimentos</div>
+                <h2>O que as <em>marcas</em> dizem</h2>
+            </div>
+            <div class="tg">
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">A Julia transformou completamente a nossa presença no Instagram. Em 3 meses
+                        triplicamos o engajamento e os clientes chegam comentando o feed. Incrível!</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">Fundadora · ***</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">Super profissional e estratégica. Nosso TikTok saiu do zero para 50k seguidores em 4
+                        meses com conteúdo que realmente representa a marca.</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">CEO · ***</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc rev">
+                    <div class="qm">"</div>
+                    <p class="tt">Diferente de tudo que já contratamos. A Julia entende de negócio, não só de redes.
+                        Cada post tem intenção e os resultados aparecem no faturamento.</p>
+                    <div class="ta">
+                        <div class="av">*</div>
+                        <div>
+                            <div class="an">***</div>
+                            <div class="ar">Sócio · ***</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CONTATO ═══════════════ -->
+    <section id="contato">
+        <div class="inner">
+            <div class="rev" style="text-align:center;max-width:600px;margin:0 auto 80px">
+                <div class="stag" style="justify-content:center">Contato</div>
+                <div class="stit">Vamos crescer suas redes <em>juntos</em>?</div>
+                <p class="ssub" style="margin:0 auto">Disponível para contratos mensais, consultorias e projetos
+                    pontuais. Retorno em até 24h.</p>
+            </div>
+            <div class="cg">
+                <div class="ci rev">
+                    <h3>Fale diretamente comigo</h3>
+                    <p>Me conta sobre sua marca, seus objetivos e onde você quer chegar. Adoro conhecer novos projetos e
+                        pensar em estratégias juntos!</p>
+                    <div class="cd">
+                        <div class="cit">
+                            <div class="cic">📧</div>
+                            <div>
+                                <div class="cil">E-mail</div>
+                                <div class="civ">julia@exemplo.com</div>
+                            </div>
+                        </div>
+                        <div class="cit">
+                            <div class="cic">📱</div>
+                            <div>
+                                <div class="cil">WhatsApp</div>
+                                <div class="civ">+55 (82) 99624-1281</div>
+                            </div>
+                        </div>
+                        <div class="cit">
+                            <div class="cic">📍</div>
+                            <div>
+                                <div class="cil">Localização</div>
+                                <div class="civ">Maceió - AL — atendo globalmente</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slnk">
+                        <a href="#">🎵</a><a href="#">📸</a><a href="#">▶</a>
+                        <a href="#" style="font-size:.75rem;font-weight:500">in</a>
+                    </div>
+                </div>
+                <div class="rev"
+                    style="background:var(--warm);border:1px solid rgba(255,192,203,.35);border-radius:24px;padding:48px 40px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px">
+                    <div
+                        style="width:64px;height:64px;background:var(--pink-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;border:1px solid rgba(255,192,203,.4)">
+                        📱
+                    </div>
+                    <div>
+                        <h3
+                            style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--dark);margin-bottom:12px;font-weight:300">
+                            Bora conversar?</h3>
+                        <p style="font-size:.95rem;color:var(--muted);line-height:1.6;max-width:300px;margin:0 auto">Me
+                            chama no WhatsApp! Respondo rápido e adoro entender o projeto antes mesmo de fecharmos
+                            qualquer proposta.</p>
+                    </div>
+                    <a href="https://wa.me/5582996241281?text=Olá,%20Julia!%20Vim%20pelo%20seu%20portfólio%20de%20Social%20Media%20e%20quero%20saber%20mais."
+                        target="_blank" class="bp-pink" style="width:100%;text-align:center;margin-top:10px">
+                        CHAMAR NO WHATSAPP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer>
+        <div class="fl">Julia<b>.</b></div>
+        <div class="footer-links">
+            <a href="index.html" class="footer-switch">→ Ver Portfólio UGC</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#contato">Contato</a>
+        </div>
+        <p class="ft">© 2026 Julia Figueiredo Social Media · Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        // ── Nav scroll ──────────────────────────────────────────────────
+        window.addEventListener('scroll', () =>
+            document.getElementById('nb').classList.toggle('s', scrollY > 60)
+        );
+
+        // ── Tabs do portfólio ───────────────────────────────────────────
+        document.querySelectorAll('.tb').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('.tb').forEach(x => x.classList.remove('a'));
+            document.querySelectorAll('.pp').forEach(x => x.classList.remove('a'));
+            b.classList.add('a');
+            document.getElementById('t' + b.dataset.t).classList.add('a');
+        }));
+
+        // ── Scroll reveal ───────────────────────────────────────────────
+        const obs = new IntersectionObserver(entries => entries.forEach((e, i) => {
+            if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i * 60); obs.unobserve(e.target); }
+        }), { threshold: .1 });
+        document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+        // ── Play/pause de vídeos nos reels ao hover ─────────────────────
+        document.querySelectorAll('.reel-item video').forEach(video => {
+            video.closest('.reel-item').addEventListener('mouseenter', () => video.play().catch(() => { }));
+            video.closest('.reel-item').addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+        });
+    </script>
+
+</body>
+
+</html>
