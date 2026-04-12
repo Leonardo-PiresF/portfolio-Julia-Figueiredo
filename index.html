@@ -717,14 +717,15 @@
             color: rgba(255, 255, 255, .6)
         }
 
+        /* grade de fotos */
         .pg {
-            columns: 3;
-            column-gap: 20px
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
         }
 
         .pi {
-            break-inside: avoid;
-            margin-bottom: 20px;
+            aspect-ratio: 4/5;
             border-radius: 16px;
             overflow: hidden;
             position: relative;
@@ -742,8 +743,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            border-radius: 16px
+            display: block
         }
 
         .av img {
@@ -1420,7 +1420,7 @@
             }
 
             .pg {
-                columns: 2
+                grid-template-columns: repeat(2, 1fr)
             }
 
             .pg2 {
@@ -1463,7 +1463,7 @@
             }
 
             .pg {
-                columns: 1
+                grid-template-columns: repeat(2, 1fr)
             }
 
             .pg2 {
@@ -1765,63 +1765,63 @@
             <div class="pp" id="tf">
                 <div class="pg">
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto1.jpg"
-                        style="height:320px;background:linear-gradient(135deg,#ffc0cb,#041e42)">
+                        style="background:linear-gradient(135deg,#ffc0cb,#041e42)">
                         <img src="fotos/portfolio(1).jpg" alt="Product Shot" loading="lazy">
                         <div class="pov">
                             <div class="pot">Maria's<br>Product Shot</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto2.jpg"
-                        style="height:240px;background:linear-gradient(135deg,#b5798a,#020f21)">
+                        style="background:linear-gradient(135deg,#b5798a,#020f21)">
                         <img src="fotos/portfolio(2).jpg" alt="Lifestyle" loading="lazy">
                         <div class="pov">
                             <div class="pot">Maria's<br>Product Shot</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto3.jpg"
-                        style="height:380px;background:linear-gradient(135deg,#fff0f3,#041e42)">
+                        style="background:linear-gradient(135deg,#fff0f3,#041e42)">
                         <img src="fotos/portfolio(3).jpg" alt="Campaign" loading="lazy">
                         <div class="pov">
                             <div class="pot">Maria's<br>Product Shot</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto4.jpg"
-                        style="height:280px;background:linear-gradient(135deg,#ffd6dd,#1c3e6b)">
+                        style="background:linear-gradient(135deg,#ffd6dd,#1c3e6b)">
                         <img src="fotos/portfolio(4).JPG" alt="Flat Lay" loading="lazy">
                         <div class="pov">
                             <div class="pot">Beth Girl<br>Dia dos Namorados</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto5.jpg"
-                        style="height:360px;background:linear-gradient(135deg,#ffc0cb,#15355e)">
+                        style="background:linear-gradient(135deg,#ffc0cb,#15355e)">
                         <img src="fotos/portfolio(5).JPG" alt="In-Use" loading="lazy">
                         <div class="pov">
                             <div class="pot">We Pink<br>Portfólio</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto6.jpg"
-                        style="height:220px;background:linear-gradient(135deg,#ffffff,#b5798a)">
+                        style="background:linear-gradient(135deg,#ffffff,#b5798a)">
                         <img src="fotos/portfolio(6).JPG" alt="Texture Shot" loading="lazy">
                         <div class="pov">
                             <div class="pot">Hollyland<br>Portfólio</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto7.jpg"
-                        style="height:300px;background:linear-gradient(135deg,#ffe8ed,#041e42)">
+                        style="background:linear-gradient(135deg,#ffe8ed,#041e42)">
                         <img src="fotos/portfolio(7).JPG" alt="Color Story" loading="lazy">
                         <div class="pov">
                             <div class="pot">We Pink<br>Portfólio</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto8.jpg"
-                        style="height:260px;background:linear-gradient(135deg,#ffc0cb,#0a2a57)">
+                        style="background:linear-gradient(135deg,#ffc0cb,#0a2a57)">
                         <img src="fotos/portfolio(8).JPG" alt="Portrait" loading="lazy">
                         <div class="pov">
                             <div class="pot">We Pink<br>Portfólio</div>
                         </div>
                     </div>
                     <div class="pi" onclick="opnLb(this)" data-full="fotos/full/foto9.jpg"
-                        style="height:340px;background:linear-gradient(135deg,#fff5f7,#041e42)">
+                        style="background:linear-gradient(135deg,#fff5f7,#041e42)">
                         <img src="fotos/portfolio.JPG" alt="Unboxing" loading="lazy">
                         <div class="pov">
                             <div class="pot">We Pink<br>Portfólio</div>
